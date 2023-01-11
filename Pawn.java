@@ -11,13 +11,9 @@ public class Pawn extends Piece{
     }
     public Piece[][] move(int y, int x, Piece[][] board, boolean ghost){
         
-        board = basicMovement(board,currentX, x, currentY, y, 0,1, ghost);
+        board = basicMovement(board,currentX, x, currentY, y, 0,color, ghost);
         if(firstMove){
-            board = basicMovement(board, currentX, x, currentY, y, 0,2, ghost);
-        }
-        board = basicMovement(board, currentX, x, currentY, y, 0,-1, ghost);
-        if(firstMove){
-            board = basicMovement(board, currentX, x, currentY, y, 0,-2, ghost);
+            board = basicMovement(board, currentX, x, currentY, y, 0,color*2, ghost);
         }
         if(!ghost){
             firstMove = false;

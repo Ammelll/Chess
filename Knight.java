@@ -9,8 +9,6 @@ public class Knight extends Piece{
         this.currentY = y;
     }
     public Piece[][] move(int y, int x, Piece[][] board, boolean ghost){
-        System.out.println("X: " + x + " " + "Y: " + y);
-        System.out.println("CX: " + currentX + " " + "CY: " + currentY);
         board = knightMove(board, y, x,-1, 2);
         board = knightMove(board, y, x,1, 2);
         board = knightMove(board, y, x,2, -1);

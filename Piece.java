@@ -21,11 +21,11 @@ public class Piece {
         if(this.symbol.equals("-")){return false;}
         return true;
     }
-    public Piece[][] getBoardCopy(){
+    public Piece[][] getBoardCopy(Piece[][] board){
         Piece[][] b = new Piece[8][8];
           for(int i = 0; i < 8; i++){
             for(int j =0; j<8;j++){
-              b[i][j] = Main.board[i][j];
+              b[i][j] = board[i][j];
             }
           }
         return b;
@@ -45,17 +45,14 @@ public class Piece {
     
     if(c == d){
         if(board[y][x].getColor()!= color){
-            System.out.println("A " + a + " B " + b);
             if(b > a){
                 for(int i = 1; i <  b-a; i++){
                     if(xOrYAxis){
-                        System.out.println("A");
                         if(board[y-i][x].hasPiece()){
                             b1 = false;
                         }
                     }
                     if(!(xOrYAxis)){
-                        System.out.println("B");
                         if(board[y][x-i].hasPiece()){
                             b1 = false;
                         }
@@ -72,13 +69,11 @@ public class Piece {
             else if(b < a){
                 for(int i = 1; i <  a-b; i++){
                     if(xOrYAxis){
-                        System.out.println("Q");
                         if(board[y+i][x].hasPiece()){
                             b2 = false;
                         }
                     }
                     if(!(xOrYAxis)){
-                        System.out.println("P");
                         if(board[y][x+i].hasPiece()){
                             b2 = false;
                         }
@@ -122,13 +117,10 @@ public class Piece {
                     flipSign2 = 1;
                 }
                 for(int i = 1; i < Math.abs(d-c);i++){
-                    System.out.println((c+i*flipSign1) + " | " + (a+i*flipSign2));
-                    System.out.println(bool);
                     if(board[c+i*flipSign2][a+i*flipSign1].hasPiece()){
                         bool = false;
                     }
                 }
-                System.out.println(bool);
             }
                     if(bool){
                         board[d][b] = board[c][a];

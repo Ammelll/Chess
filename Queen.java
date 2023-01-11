@@ -9,9 +9,7 @@ public class Queen extends Piece {
     }
     public Piece[][] move(int y, int x, Piece[][] board, boolean ghost){
 
-        Piece[][] boardCopy = getBoardCopy();
-        System.out.println("QX: " + x + " " + "Y: " + y);
-        System.out.println("QCX: " + currentX + " " + "CY: " + currentY);
+       
         board = diag(board, currentX, x, currentY, y);
         board = slide(currentX, x, currentY,y, true, true, x, y,false);
         board = slide(currentY, y, x, currentX, true, true, x, y,true);

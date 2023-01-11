@@ -8,8 +8,6 @@ public class Bishop extends Piece {
         this.currentY = y;
     }
     public Piece[][] move(int y, int x, Piece[][] board, boolean ghost){
-        System.out.println("BX: " + x + " " + "Y: " + y);
-        System.out.println("BCX: " + currentX + " " + "CY: " + currentY);
         board = diag(board, currentX, x, currentY, y);
         return board;
     }

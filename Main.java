@@ -17,18 +17,52 @@ public class Main{
                 board[i][j] = new Piece();
             }
         }    
-        MiniMaxABP mini = new MiniMaxABP(-1);
-        ArrayList<ArrayList<Integer>> tempBoard = mini.getLegalMoves(board[1][0]);
-        while(true){
-            Main.printBoard(board);
-            int chosenPieceX = Integer.parseInt(scanner.nextLine());
-            int chosenPieceY = Integer.parseInt(scanner.nextLine());
-            int attemptX = Integer.parseInt(scanner.nextLine());
-            int attemptY = Integer.parseInt(scanner.nextLine());
-            board[chosenPieceY][chosenPieceX].move(attemptY, attemptX, board, false);
-            Main.promotionCheck();
-        }
+        MiniMaxABP mini = new MiniMaxABP();
+
+        ArrayList<ArrayList<Integer>> pieces = mini.getPieceLocations(-1, board);
+    
+
+        // for (int i = 0; i < pieces.size(); i++) {
+        //     for (int j = 0; j < pieces.get(0).size()-1; j++) {
+
+        //         ArrayList<ArrayList<Integer>> legalMoves = mini.getLegalMoves(board[pieces.get(i).get(j)][pieces.get(i).get(j+1)]);
+        //         for (int k = 0; k < legalMoves.size(); k++) {
+        //             for (int l = 0; l < legalMoves.get(0).size()-1; l++) {
+        //                 System.out.println(legalMoves.get(k).get(l) + " " + legalMoves.get(k).get(l+1));
+                        
+        //             }
+        //         }
+        //     }
+            
+        // }
+        // printBoard(board);
+    // }
+        // MiniMaxABP mini = new MiniMaxABP();
+        // ArrayList<ArrayList<Integer>> pieces = mini.getPieceLocations(-1, board);
+        // for (int i = 0; i < pieces.size(); i++) {
+        //     for (int j = 0; j < pieces.get(0).size(); j++) {
+        //         System.out.println(pieces.get(i).get(j));
+        //     }
+        // }
+
+        // Node root = new Node(board,new ArrayList<ArrayList<Integer>>(), -1, 0, 0);
+        // for(Node n : root.nodeArray){
+        //     for(Node node : n.nodeArray){
+        //         printBoard(n.currentBoard);
+
+        //     }
+        // }
     }
+    //     while(true){
+    //         Main.printBoard(board);
+    //         int chosenPieceX = Integer.parseInt(scanner.nextLine());
+    //         int chosenPieceY = Integer.parseInt(scanner.nextLine());
+    //         int attemptX = Integer.parseInt(scanner.nextLine());
+    //         int attemptY = Integer.parseInt(scanner.nextLine());
+    //         board[chosenPieceY][chosenPieceX].move(attemptY, attemptX, board, false);
+    //         Main.promotionCheck();
+    //     }
+    // }
 
 
 
@@ -50,14 +84,23 @@ public class Main{
         }
     }
     public static void populate(int r, int c){
-        board[r][0] = new Rook(c,r,0);
-        board[r][1] = new Knight(c,r,1);       
-        board[r][2] = new Bishop(c,r,2);         
-        board[r][3] = new Queen(c,r,3);    
-        board[r][4] = new King(c,r,4);    
-        board[r][5] = new Bishop(c, r, 5);    
-        board[r][6] = new Knight(c,r,6);
-        board[r][7] = new Rook(c,r,7);  
+        // board[r][0] = new Rook(c,r,0);
+        // board[r][1] = new Knight(c,r,1);       
+        // board[r][2] = new Bishop(c,r,2);         
+        // board[r][3] = new Queen(c,r,3);    
+        // board[r][4] = new King(c,r,4);    
+        // board[r][5] = new Bishop(c, r, 5);    
+        // board[r][6] = new Knight(c,r,6);
+        // board[r][7] = new Rook(c,r,7);  
+        board[r][0] = new Piece();
+        board[r][1] = new Piece();
+        board[r][2] = new Piece();
+        board[r][3] = new Piece();
+        board[r][4] = new Piece();
+        board[r][5] = new Piece();
+        board[r][6] = new Piece();
+        board[r][7] = new Piece();
+
     }
     public static Piece[][] getBoardCopy(){
         Piece[][] b = new Piece[8][8];
