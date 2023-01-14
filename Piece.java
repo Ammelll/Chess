@@ -132,9 +132,26 @@ public class Piece {
             }
             return board;
         }
+        //currentX, x, currentY, y
     public Piece[][] basicMovement(Piece[][] board, int a, int b, int c, int d, int changex, int changey, boolean ghost){
+        boolean noConflicts = true;
         if(a+changex == b && c+changey == d){
-            if(board[d][b].getColor()!= color){
+            if(c < d){
+                for(int i = c+1; i < d; i++){
+                    if(!(board[i][a].symbol.equals("-"))){
+                        noConflicts = false;
+                    }
+                }
+            }
+            if(d < c){
+                for(int i = c-1; i > d; i--){
+                    if(!(board[i][a].symbol.equals("-"))){
+                        noConflicts = false;
+                    }
+                }
+            }
+            // System.out.println(noConflicts);
+            if(board[d][b].getColor()!= color && noConflicts){
                 board[d][b] = board[c][a];
                 board[c][a] = new Piece();
                 if(!ghost){

@@ -1,25 +1,35 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 public class Main{
     public static Piece[][] board = new Piece[8][8];
     public static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args){
-        Main.populate(0,1);
-        Main.populate(7,-1);
+        // Main.populate(0,1);
+        // Main.populate(7,-1);
         for(int p = 0; p < 8; p++){
-            board[1][p] = new Pawn(1,1,p);
+            for(int j = 0; j < 8; j++)
+            board[p][j] = new Piece();
         }  
         for(int p = 0; p < 8; p++){
-            board[6][p] = new Pawn(-1,6,p);
+            board[0][p] = new Pawn(1,0,p);
         }  
-        for(int i = 2; i < 6; i++){
-            for(int j = 0; j < 8; j++){
-                board[i][j] = new Piece();
-            }
-        }    
-        MiniMaxABP mini = new MiniMaxABP();
+        for(int p = 0; p < 8; p++){
+            board[7][p] = new Pawn(-1,7,p);
+        }  
+        for(int p = 0; p < 8; p++){
+            board[2][p] = new Rook(-1,2,p);
+        }  
+       
+    
+        // for(int i = 2; i < 6; i++){
+        //     for(int j = 0; j < 8; j++){
+        //         board[i][j] = new Piece();
+        //     }
+        // }    
+        // MiniMaxABP mini = new MiniMaxABP();
 
-        ArrayList<ArrayList<Integer>> pieces = mini.getPieceLocations(-1, board);
+        // ArrayList<ArrayList<Integer>> pieces = mini.getPieceLocations(-1, board);
     
 
         // for (int i = 0; i < pieces.size(); i++) {
@@ -45,29 +55,66 @@ public class Main{
         //     }
         // }
 
-        // Node root = new Node(board,new ArrayList<ArrayList<Integer>>(), -1, 0, 0);
-        // for(Node n : root.nodeArray){
-        //     for(Node node : n.nodeArray){
-        //         printBoard(n.currentBoard);
 
-        //     }
         // }
-    }
-    //     while(true){
-    //         Main.printBoard(board);
-    //         int chosenPieceX = Integer.parseInt(scanner.nextLine());
-    //         int chosenPieceY = Integer.parseInt(scanner.nextLine());
-    //         int attemptX = Integer.parseInt(scanner.nextLine());
-    //         int attemptY = Integer.parseInt(scanner.nextLine());
-    //         board[chosenPieceY][chosenPieceX].move(attemptY, attemptX, board, false);
-    //         Main.promotionCheck();
-    //     }
-    // }
-
-
-
-
+        // printBoard(board);
+        // List<Integer> bestMove = getBestMove();
+        // board[bestMove.get(0)][bestMove.get(1)] = board[bestMove.get(2)][bestMove.get(3)]; 
+        while(true){
+            List<Integer> bestMove = getBestMove();
+            board[bestMove.get(0)][bestMove.get(1)] = board[bestMove.get(2)][bestMove.get(3)];
+            board[bestMove.get(2)][bestMove.get(3)] = new Piece();
+            // for (int i = 0; i < 4; i++) {
+            //     System.out.println(bestMove.get(i));
+            // }
+            Main.printBoard(board);
+            int chosenPieceX = Integer.parseInt(scanner.nextLine());
+            int chosenPieceY = Integer.parseInt(scanner.nextLine());
+            int attemptX = Integer.parseInt(scanner.nextLine());
+            int attemptY = Integer.parseInt(scanner.nextLine());
+            board[chosenPieceY][chosenPieceX].move(attemptY, attemptX, board, false);
+            System.out.println("interesting");
+            Main.promotionCheck();
+        }
     
+    }
+
+
+
+
+    public static List<Integer> getBestMove(){
+        List<Integer> list = new ArrayList<Integer>();
+        Node root = new Node(board,list, -1, 0, 0, 1);
+        int highest = -200;
+        for(Node n : root.nodeArray){
+            for(Node no : n.nodeArray){
+                for(Node nod : no.nodeArray){
+                    for(Node node : nod.nodeArray){
+                        if(node.score > highest){
+                            highest = node.score;
+                        }
+                    }
+            
+                }
+            }
+            }
+            for(Node n : root.nodeArray){
+                for(Node no : n.nodeArray){
+                    for(Node nod : no.nodeArray){
+                        for(Node node : nod.nodeArray){
+                            if(node.score == highest){
+                                printBoard(node.currentBoard);
+                                return node.asList;
+                            }
+                        }
+                
+                    }
+                }
+                }
+
+    return new ArrayList<Integer>();
+
+    }
     public static Piece[][] promotionCheck(){
         for(int i = 0; i < 7; i++){
             board = board[0][i].promote(0,i);

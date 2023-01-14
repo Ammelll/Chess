@@ -7,13 +7,13 @@ public class MiniMaxABP {
   public MiniMaxABP() {
   }
 
-  public Piece[][] getBoardCopy() {
+  public Piece[][] getBoardCopy(Piece[][] board){
     Piece[][] b = new Piece[8][8];
-    for (int i = 0; i < 8; i++) {
-      for (int j = 0; j < 8; j++) {
-        b[i][j] = Main.board[i][j];
+      for(int i = 0; i < 8; i++){
+        for(int j =0; j<8;j++){
+          b[i][j] = board[i][j];
+        }
       }
-    }
     return b;
   }
 
@@ -26,24 +26,40 @@ public class MiniMaxABP {
           arrayOfPieces.add(new ArrayList<Integer>(asList));
         }
       }
+
     }
+    // Main.printBoard(board);
+    // for (int i = 0; i < arrayOfPieces.size(); i++) {
+    //   for (int j = 0; j < arrayOfPieces.get(0).size(); j++) {
+    //     System.out.println(arrayOfPieces.get(i));        
+    //   }
+    // }
     return arrayOfPieces;
   }
 
   public ArrayList<ArrayList<Integer>> getLegalMoves(Piece p) {
-    Piece[][] board = getBoardCopy();
-    ArrayList<ArrayList<Integer>> arrayOfLegalmoves = new ArrayList<ArrayList<Integer>>();
+    Piece[][] board = getBoardCopy(Main.board);
+    ArrayList<ArrayList<Integer>> arrayOfLegalMoves = new ArrayList<ArrayList<Integer>>();
+    
     for (int w = 0; w < 8; w++) {
       for (int h = 0; h < 8; h++) {
-        board = getBoardCopy();
+        board = getBoardCopy(Main.board);
         Piece[][] temp = p.move(h, w, board, true);
-        if(!(isEqual(temp,getBoardCopy()))){
+        // Main.printBoard(temp);
+        // Main.printBoard(getBoardCopy(board));
+
+        if(!(isEqual(temp,getBoardCopy(Main.board)))){
           List<Integer> asList = (List<Integer>) Arrays.asList(w, h);
-          arrayOfLegalmoves.add(new ArrayList<Integer>(asList));
+          arrayOfLegalMoves.add(new ArrayList<Integer>(asList));
         }
+        
+
       }
     }
-    return arrayOfLegalmoves;
+    if(arrayOfLegalMoves.size() == 0){
+      // System.out.println(p.currentX + " " + p.currentY);
+    }
+    return arrayOfLegalMoves;
   }
   public static boolean isEqual(Piece[][] arr1, Piece[][] arr2){
     //Main.printBoard(arr1);

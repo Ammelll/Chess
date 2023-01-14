@@ -9,7 +9,6 @@ public class Rook extends Piece {
     }
     
     public Piece[][] move(int y, int x, Piece[][] board, boolean ghost){
-       
         board = slide(currentX, x, currentY,y, true, true, x, y,false);
         board = slide(currentY, y, x, currentX, true, true, x, y,true);
 
